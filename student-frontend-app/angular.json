@@ -122,5 +122,8 @@
         }
       }
     }},
-  "defaultProject": "student-frontend-app"
+  "defaultProject": "student-frontend-app",
+  "cli": {
+    "analytics": "6b3f5ca1-5461-427e-8432-0ceff7ecc770"
+  }
 }
