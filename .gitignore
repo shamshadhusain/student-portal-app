@@ -1,2 +1,6 @@
 student-frontend-app/node_modules/*
 student-frontend-app/dist/*
+student-frontend-app/.angular/*
+student-frontend-app/.angular/cache/15.2.10/*
+student-backend-app/node_modules/*
+student-backend-app/package-lock.json
