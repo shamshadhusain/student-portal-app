@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   toggle() {
+    console.log(this.disabledPassword, "this.disabledPassword")
     if (this.disabledPassword === true) {
       this.disabledPassword = false;
       this.togglePassword = 'visibility_off';
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
 
   onLoginClick() {
     this.http.get('http://localhost:3000/user/logIn/').subscribe((res: any) => {
-      console.log('Get users', res);
+      console.log('Get Admin', res);
       this.router.navigate(['/viewStudent']);
     }, err => {
         console.log('ERROR IN LOGIN...', err);
