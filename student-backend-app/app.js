@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const userRoute = require('./api/modules/user/user.routes');
+const userRoute = require('./api/modules/admin/admin.routes');
 const studentRoutes = require('./api/modules/student/student.routes');
 require('dotenv/config')
 
@@ -20,6 +20,7 @@ app.use("/user", userRoute);
 app.use("/student", studentRoutes);
 
 app.use((req, res, next) => {
+    console.log(req, res, "app req, res")
     const error = new Error("Not found");
     error.status = 404;
     next(error);

@@ -73,3 +73,17 @@ exports.update_Student = async (req, res) => {
     const updatedStudent = await Student.findByIdAndUpdate({_id: req.params.id }, { $set: req.body });
     res.json(updatedStudent);
 };
+
+exports.get_exam_list = async (req, res) => {
+    const student1 = await Student.findById(req.params.id);
+    res.status(200).json({
+        message: student1
+    });
+};
+
+exports.get_boarding_pass = async (req, res) => {
+    const student1 = await Student.findById(req.params.id);
+    res.status(200).json({
+        message: student1
+    });
+};

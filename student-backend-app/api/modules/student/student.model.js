@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const userSchema = require('../user/user.model');
+const adminSchema = require('../admin/admin.model');
 
 const studentSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,

@@ -12,5 +12,9 @@ router.delete('/deleteStudent/:id', studentController.delete_student);
 
 router.patch('/updateStudent/:id', studentController.update_Student);
 
+router.patch('/get_exam_list', studentController.get_exam_list);
+
+router.patch('/get_boarding_pass/:id', studentController.get_boarding_pass);
+
 
 module.exports = router;

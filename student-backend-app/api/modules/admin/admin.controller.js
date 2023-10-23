@@ -1,24 +1,24 @@
 const mongoose = require('mongoose');
-const User = require('../user/user.model');
+const Admin = require('./admin.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.user_signUp = async(req, res) => {
+exports.admin_signUp = async(req, res) => {
     try { 
-        const user = await User.find({ email: req.body.email });
-        console.log(user);
-        if (user.length >= 1) {
+        const admin = await Admin.find({ email: req.body.email });
+        console.log(admin);
+        if (usadminer.length >= 1) {
             return res.status(409).json({
                 message: "Mail already exist!"
             });
         } else {
             //bcrypt..
-            console.log("Hello1");
+            console.log("debuger-1");
             bcrypt.hash((req.body.password).trim(), 10, async (err, hash) => {
-                console.log("Hello2");
+                console.log("Debugger-2");
                 if (!err) {
-                    console.log("Hello3");
-                        const student = new User({
+                    console.log("Debugger-3");
+                        const student = new Admin({
                             _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
                             password: hash
@@ -27,13 +27,13 @@ exports.user_signUp = async(req, res) => {
                     try {
                         const stud = await student.save();
                         return res.json({
-                            message: "User saved.",
+                            message: "Admin saved.",
                             stud
                         });
                     } catch (err) {
                         return res.json({
                             error: err,
-                            message: "User not Saved."
+                            message: "Admin not Saved."
                         });
                     }
                 } else {
@@ -52,20 +52,18 @@ exports.user_signUp = async(req, res) => {
     }        
 };
 
-exports.user_logIn = async(req, res) => {
+exports.admin_logIn = async(req, res) => {
+   console.log(req, res, "req, res")
     try {
-        const user = await User.findOne({ email: req.body.email });
-        // res.status(200).json({
-        //     user: user
-        // });
-
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
+        const admin = await Admin.findOne({ email: req.body.email });
+        console.log("admin_logIn", admin)
+        bcrypt.compare(req.body.password, admin.password, (err, result) => {
             console.log("Hello2 bcrypt");
             if (result) {
                 const token = jwt.sign(
                     {
-                        email: user.email,
-                        _id: user._id,
+                        email: admin.email,
+                        _id: admin._id,
                     },
                     process.env.JWT_TOKEN,
                     {
@@ -85,15 +83,15 @@ exports.user_logIn = async(req, res) => {
         });
     } catch (err) {
         res.json({
-            message: 'Not found!!!',
+            message: 'Not found in admin_logIn!!!',
             error: err
         });
     }
-};
+};  
 
-exports.user_delete = async (req, res) => {
+exports.admin_delete = async (req, res) => {
     try {
-        const removedUser = await User.remove({
+        const removedUser = await Admin.remove({
             _id: req.params.id
         });
         res.json(removedUser);
@@ -104,9 +102,9 @@ exports.user_delete = async (req, res) => {
     }
 };
 
-exports.user_update = async (req, res) => {
+exports.admin_update = async (req, res) => {
     try {
-        const updateUser = await User.updateOne({ _id: req.params.id }, { $set: { email: req.body.email } });  
+        const updateAdmin = await Admin.updateOne({ _id: req.params.id }, { $set: { email: req.body.email } });  
     } catch (err) {
         res.json({
             message: err
@@ -114,11 +112,11 @@ exports.user_update = async (req, res) => {
     }
 }
 
-exports.user_getAll = async (req, res) => {
+exports.admin_getAll = async (req, res) => {
     try {
-        const users = await User.find();
+        const admins = await Admin.find();
         res.json({
-            users: users
+            admins: admins
         });
     } catch (err) {
         res.json({
